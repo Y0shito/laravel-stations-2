@@ -12,4 +12,9 @@ class MovieController extends Controller
         $movies = Movie::all();
         return view('user.movies', compact('movies'));
     }
+
+    public function showAdminMovies()
+    {
+        return view('admin.movies');
+    }
 }
