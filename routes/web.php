@@ -28,4 +28,5 @@ Route::get('/movies', [MovieController::class, 'index'])->name('movies');
 
 Route::prefix('/admin/movies')->group(function () {
     Route::get('/', [MovieController::class, 'showAdminMovies'])->name('admin.movies');
+    Route::get('/{id}', [MovieController::class, 'showAdminMovie'])->name('admin.movie');
 });
