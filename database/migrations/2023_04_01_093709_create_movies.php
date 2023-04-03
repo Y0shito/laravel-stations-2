@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateMovies extends Migration
@@ -17,9 +18,10 @@ class CreateMovies extends Migration
             $table->bigIncrements('id')->comment('ID');
             $table->text('title')->comment('映画タイトル');
             $table->text('image_url')->comment('画像URL');
-            $table->timestamp('created_at')->comment('登録日時');
-            $table->timestamp('updated_at')->comment('更新日時');
+            $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE movies MODIFY created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "登録日時", MODIFY updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新日時"');
     }
 
     /**
