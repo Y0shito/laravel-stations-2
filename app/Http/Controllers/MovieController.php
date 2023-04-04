@@ -23,4 +23,9 @@ class MovieController extends Controller
     {
         return view('admin.movie', ['movie' => $id]);
     }
+
+    public function showAdminMovieCreate()
+    {
+        return view('admin.movie.create');
+    }
 }

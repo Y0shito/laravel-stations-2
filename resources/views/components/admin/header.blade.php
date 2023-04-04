@@ -2,7 +2,7 @@
     <p><a href="{{ route('admin.movies') }}">管理者画面/{{ $title }}</a></p>
     <nav>
         <ul>
-            <li><a href="">映画新規入力</a></li>
+            <li><a href="{{ route('admin.movie.create') }}">映画新規登録</a></li>
             <li><a href="">スケジュール一覧</a></li>
             <li><a href="">予約一覧</a></li>
         </ul>

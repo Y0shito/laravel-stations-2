@@ -28,5 +28,9 @@ Route::get('/movies', [MovieController::class, 'index'])->name('movies');
 
 Route::prefix('/admin/movies')->group(function () {
     Route::get('/', [MovieController::class, 'showAdminMovies'])->name('admin.movies');
-    Route::get('/{id}', [MovieController::class, 'showAdminMovie'])->name('admin.movie');
+    Route::get('create', [MovieController::class, 'showAdminMovieCreate'])->name('admin.movie.create');
+    Route::get('{id}', [MovieController::class, 'showAdminMovie'])->name('admin.movie');
 });
+
+//映画新規作成のURLがadmin/movies/createとsがつくのに対し、nameはadmin.movie.createとしている（作れるのは1個なので）
+//sを統一すべきか？
