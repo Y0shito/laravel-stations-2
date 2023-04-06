@@ -12,6 +12,8 @@
 <body>
     @include('components.admin.header', ['title' => "映画一覧/{$movie->title}"])
 
+    @include('components.flashmessage')
+
     <div class="contents">
         <h2>{{ $movie->title }}</h2>
         <img src={{ $movie->image_url }} width="400">

@@ -11,6 +11,8 @@
 <body>
     @include('components.admin.header', ['title' => '映画一覧'])
 
+    @include('components.flashmessage')
+
     <div class="contents">
         <table>
             <tr>
