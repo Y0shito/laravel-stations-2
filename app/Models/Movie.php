@@ -30,4 +30,17 @@ class Movie extends Model
             self::find($movieId)->update($movieData);
         });
     }
+
+    public static function movieDelete(int $movieId): void
+    {
+        DB::transaction(function () use ($movieId) {
+            $movie = self::find($movieId);
+
+            if (is_null($movie)) {
+                abort(404);
+            }
+
+            $movie->delete();
+        });
+    }
 }

@@ -69,4 +69,15 @@ class MovieController extends Controller
             return redirect()->back()->with('failed', '編集が失敗しました');
         }
     }
+
+    public function adminMovieDelete(Movie $id)
+    {
+        try {
+            Movie::movieDelete($id->id);
+
+            return redirect()->back()->with(['success' => "「{$id->title}」の削除が完了しました"]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['failed' => "「{$id->title}」の削除が失敗しました"]);
+        }
+    }
 }

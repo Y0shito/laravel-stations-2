@@ -44,6 +44,15 @@
                             <button value="{{ $movie->id }}" name="id">編集</button>
                         </form>
                     </td>
+                    <td>
+                        <form method="POST" action="{{ route('admin.movie.delete', $movie->id) }}">
+                            @method('DELETE')
+                            @csrf
+                            <button value="{{ $movie->id }}" name="id" onclick="return movieDelete();">
+                                削除
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
@@ -63,5 +72,13 @@
         white-space: nowrap;
     }
 </style>
+
+<script>
+    'use strict';
+    const movieDelete = () => {
+        var ret = confirm("削除を実行しますか？");
+        return ret;
+    }
+</script>
 
 </html>
