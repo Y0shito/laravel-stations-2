@@ -42,9 +42,9 @@ class MovieController extends Controller
                 'description'
             ]));
 
-            return redirect()->route('admin.movie', ['id' => $movieId])->with('success', '登録が完了しました');
+            return redirect()->route('admin.movie', $movieId)->with('success', '登録が完了しました');
         } catch (\Exception $e) {
-            return redirect()->route('admin.movies')->with('failed', '登録が失敗しました');
+            return redirect()->back()->with('failed', '登録が失敗しました');
         }
     }
 
