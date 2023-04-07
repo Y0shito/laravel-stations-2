@@ -12,7 +12,7 @@ class Movie extends Model
 
     protected $fillable = ['title', 'image_url', 'published_year', 'is_showing', 'description', 'created_at', 'updated_at'];
 
-    public static function movieCreate(array $movieData)
+    public static function movieCreate(array $movieData): int
     {
         return DB::transaction(function () use ($movieData) {
             $movieId = DB::table('movies')->insertGetId($movieData);
@@ -24,7 +24,7 @@ class Movie extends Model
     //実務では悪手か？
     //contからmodelは追えるが、modelからcontは追いづらい、ならmodelに詳細を書くべきか
 
-    public static function movieUpdate(array $movieData, $movieId)
+    public static function movieUpdate(array $movieData, $movieId): void
     {
         DB::transaction(function () use ($movieData, $movieId) {
             self::find($movieId)->update($movieData);
