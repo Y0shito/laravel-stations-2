@@ -11,16 +11,10 @@
 
 <body>
     @include('components.admin.header', ['title' => '映画新規登録'])
-
     @include('components.flashmessage')
+    @include('components.validationErrors')
 
     <div class="contents">
-        @error('title')
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        @enderror
-
         <form method="POST" action="{{ route('admin.movie.store') }}">
             @csrf
             <ul>

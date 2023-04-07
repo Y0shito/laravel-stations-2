@@ -42,7 +42,7 @@ class CreateMovieRequest extends FormRequest
             'image_url.url' => '有効なURLで入力してください',
             'published_year.required' => '公開日を入力してください',
             'published_year.numeric' => '公開日を数字で入力してください',
-            'published_year.between' => '公開日を1895から2022の間で入力してください',
+            'published_year.gte' => '公開日を1895以降で入力してください',
             'description.required' => '概要を入力してください',
             'description.max' => '概要は100文字以内で入力してください',
         ];
