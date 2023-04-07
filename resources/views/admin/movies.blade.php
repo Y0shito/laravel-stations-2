@@ -10,7 +10,6 @@
 
 <body>
     @include('components.admin.header', ['title' => '映画一覧'])
-
     @include('components.flashmessage')
 
     <div class="contents">
@@ -40,6 +39,11 @@
                     <td>{{ $movie->description }}</td>
                     <td>{{ $movie->created_at }}</td>
                     <td>{{ $movie->updated_at }}</td>
+                    <td>
+                        <form method="GET" action="{{ route('admin.movie.edit', $movie->id) }}">
+                            <button value="{{ $movie->id }}" name="id">編集</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>

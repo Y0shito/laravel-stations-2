@@ -32,6 +32,7 @@ Route::prefix('/admin/movies')->group(function () {
     Route::post('store', [MovieController::class, 'adminMovieStore'])->name('admin.movie.store');
     Route::get('{id}', [MovieController::class, 'showAdminMovie'])->name('admin.movie');
     Route::get('{id}/edit', [MovieController::class, 'showAdminMovieEdit'])->name('admin.movie.edit');
+    Route::patch('{id}/update', [MovieController::class, 'AdminMovieUpdate'])->name('admin.movie.update');
 });
 
 //映画新規作成のURLがadmin/movies/createとsがつくのに対し、nameはadmin.movie.createとしている（作れるのは1個なので）

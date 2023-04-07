@@ -23,4 +23,11 @@ class Movie extends Model
     //上記メソッドでは届いた値の中身が分からない、あるいは送信元を辿らないと分からない
     //実務では悪手か？
     //contからmodelは追えるが、modelからcontは追いづらい、ならmodelに詳細を書くべきか
+
+    public static function movieUpdate(array $movieData, $movieId)
+    {
+        DB::transaction(function () use ($movieData, $movieId) {
+            self::find($movieId)->update($movieData);
+        });
+    }
 }
