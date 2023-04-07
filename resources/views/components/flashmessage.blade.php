@@ -13,15 +13,21 @@
 <style>
     .success {
         margin: 0px 150px;
+        padding: 10px;
         display: flex;
         justify-content: space-between;
-        background-color: aqua;
+        border-radius: 5px;
+        background-color: #C8DEF4;
+        color: #355D96;
     }
 
     .failed {
         margin: 0px 150px;
+        padding: 10px;
         display: flex;
         justify-content: space-between;
-        background-color: #ff9999;
+        border-radius: 5px;
+        background-color: #F3D8D8;
+        color: #7C3C3C;
     }
 </style>
