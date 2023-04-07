@@ -40,9 +40,9 @@ class CreateMovieRequest extends FormRequest
             'title.max' => 'タイトルは30文字以内で入力してください',
             'image_url.required' => 'URLを入力してください',
             'image_url.url' => '有効なURLで入力してください',
-            'published_year.required' => '公開日を入力してください',
-            'published_year.numeric' => '公開日を数字で入力してください',
-            'published_year.gte' => '公開日を1895以降で入力してください',
+            'published_year.required' => '公開年を入力してください',
+            'published_year.numeric' => '公開年を数字で入力してください',
+            'published_year.gte' => '公開年を1895以降で入力してください',
             'description.required' => '概要を入力してください',
             'description.max' => '概要は100文字以内で入力してください',
         ];
