@@ -46,4 +46,9 @@ class MovieController extends Controller
             return redirect()->route('admin.movies')->with('failed', '登録が失敗しました');
         }
     }
+
+    public function showAdminMovieEdit(Movie $id)
+    {
+        return view('admin.movie.edit', ['movie' => $id]);
+    }
 }
