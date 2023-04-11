@@ -9,10 +9,32 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::all();
-        return view('user.movies', compact('movies'));
+        $keyword = $request->keyword;
+
+        // 検索語句無し、かつ「すべて」にチェック時は全ての映画を出力
+        if (empty($keyword) && is_null($request->is_showing)) {
+            $movies = Movie::paginate(20);
+            return view('user.movies', compact('movies'));
+        }
+
+        $foundMovies = Movie::query();
+
+        //検索語句があれば、タイトル及び概要から語句をLIKE検索
+        if (!empty($keyword)) {
+            $foundMovies->where(function ($query) use ($keyword) {
+                $query->where('title', 'like', "%$keyword%")
+                    ->orWhere('description', 'like', "%$keyword%");
+            });
+        }
+
+        //「上映中」「上映予定」いずれかにチェックあれば、公開状況からも検索
+        if (!is_null($request->is_showing)) {
+            $foundMovies->where('is_showing', $request->is_showing);
+        }
+
+        return view('user.movies', ['movies' => $foundMovies->paginate(20)]);
     }
 
     public function showAdminMovies()
