@@ -27,8 +27,6 @@ class CreateGenres extends Migration
                 ->after('title')->comment('ジャンルID');
             $table->foreign('genre_id')->references('id')->on('genres')->nullOnDelete();
         });
-
-        DB::statement('ALTER TABLE movies ADD UNIQUE(title(30))');
     }
 
     /**
