@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\SheetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::prefix('/admin/movies')->group(function () {
     Route::get('{id}/edit', [MovieController::class, 'showAdminMovieEdit'])->name('admin.movie.edit');
     Route::patch('{id}/update', [MovieController::class, 'AdminMovieUpdate'])->name('admin.movie.update');
 });
+
+Route::get('/sheets', [SheetController::class, 'showSheets'])->name('sheets');
 
 //映画新規作成のURLがadmin/movies/createとsがつくのに対し、nameはadmin.movie.createとしている（作れるのは1個なので）
 //sを統一すべきか？
