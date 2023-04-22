@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
 use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -55,18 +57,22 @@ class MovieController extends Controller
 
     public function adminMovieStore(CreateMovieRequest $request)
     {
+        DB::beginTransaction();
+
         try {
-            $movieId = Movie::movieCreate($request->only([
-                'title',
-                'image_url',
-                'published_year',
-                'is_showing',
-                'description'
-            ]));
+            //Genreへジャンル名を投げ、genres:idが返る
+            $genreId = Genre::genreCreate($request->genre);
+
+            //Movieへ値とgenreIdを投げ、例外無ければmovies:idが返る
+            $movieId = Movie::movieCreate($request, $genreId);
+
+            DB::commit();
 
             return redirect()->route('admin.movie', $movieId)->with('success', '登録が完了しました');
         } catch (\Exception $e) {
-            return redirect()->back()->with('failed', '登録が失敗しました');
+            DB::rollback();
+            abort(500);
+            // return redirect()->back()->with('failed', '登録が失敗しました');
         }
     }
 
@@ -75,20 +81,24 @@ class MovieController extends Controller
         return view('admin.movie.edit', ['movie' => $id]);
     }
 
-    public function adminMovieUpdate(UpdateMovieRequest $request)
+    public function adminMovieUpdate(UpdateMovieRequest $request, Movie $id)
     {
-        try {
-            Movie::movieUpdate($request->only([
-                'title',
-                'image_url',
-                'published_year',
-                'is_showing',
-                'description'
-            ]), $request->id);
+        DB::beginTransaction();
 
-            return redirect()->route('admin.movie', $request->id)->with('success', '編集が完了しました');
+        try {
+            //Genreへジャンル名を投げ、例外無ければgenres:idが返る
+            $genreId = Genre::genreCreate($request->genre);
+
+            //第1引数に更新する値、第2引数にgenreId、第3引数にmovie:id
+            Movie::movieUpdate($request, $genreId, $id->id);
+
+            DB::commit();
+
+            return redirect()->route('admin.movie', $id->id)->with('success', '編集が完了しました');
         } catch (\Exception $e) {
-            return redirect()->back()->with('failed', '編集が失敗しました');
+            DB::rollback();
+            abort(500);
+            // return redirect()->back()->with('failed', '編集が失敗しました');
         }
     }
 

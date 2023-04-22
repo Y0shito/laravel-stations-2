@@ -26,6 +26,7 @@ class UpdateMovieRequest extends FormRequest
     {
         return [
             'title' => ['required', Rule::unique('movies')->ignore($this->id)],
+            'genre' => ['required', 'string'],
             'image_url' => ['required', 'url', 'max:2000'],
             'published_year' => ['required', 'numeric', 'gte:1895'],
             'is_showing' => ['required', 'boolean'],
@@ -38,7 +39,8 @@ class UpdateMovieRequest extends FormRequest
         return [
             'title.required' => 'タイトルを入力してください',
             'title.unique' => 'このタイトルの映画はすでに登録されています',
-            'title.max' => 'タイトルは30文字以内で入力してください',
+            'genre.required' => 'ジャンルを入力してください',
+            'genre.string' => 'ジャンルを文字で入力してください',
             'image_url.required' => 'URLを入力してください',
             'image_url.url' => '有効なURLで入力してください',
             'published_year.required' => '公開年を入力してください',

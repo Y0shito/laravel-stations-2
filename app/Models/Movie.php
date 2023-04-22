@@ -10,30 +10,39 @@ class Movie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'image_url', 'published_year', 'is_showing', 'description', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'genre_id', 'image_url', 'published_year', 'is_showing', 'description', 'created_at', 'updated_at'];
 
     public function genre()
     {
         return $this->belongsTo(Genre::class);
     }
 
-    public static function movieCreate(array $movieData): int
+    public static function movieCreate(object $movieData, int $genreId): int
     {
-        return DB::transaction(function () use ($movieData) {
-            $movieId = DB::table('movies')->insertGetId($movieData);
-            return $movieId;
-        });
+        $movieId = Movie::insertGetId(
+            [
+                'title' => $movieData->title,
+                'genre_id' => $genreId,
+                'image_url' => $movieData->image_url,
+                'published_year' => $movieData->published_year,
+                'is_showing' => $movieData->is_showing,
+                'description' => $movieData->description
+            ]
+        );
+
+        return $movieId;
     }
 
-    //上記メソッドでは届いた値の中身が分からない、あるいは送信元を辿らないと分からない
-    //実務では悪手か？
-    //contからmodelは追えるが、modelからcontは追いづらい、ならmodelに詳細を書くべきか
-
-    public static function movieUpdate(array $movieData, $movieId): void
+    public static function movieUpdate(object $movieData, int $genreId, int $movieId): void
     {
-        DB::transaction(function () use ($movieData, $movieId) {
-            self::find($movieId)->update($movieData);
-        });
+        self::find($movieId)->update([
+            'title' => $movieData->title,
+            'genre_id' => $genreId,
+            'image_url' => $movieData->image_url,
+            'published_year' => $movieData->published_year,
+            'is_showing' => $movieData->is_showing,
+            'description' => $movieData->description
+        ]);
     }
 
     public static function movieDelete(int $movieId): void
