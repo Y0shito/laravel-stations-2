@@ -23,6 +23,11 @@
                 </li>
 
                 <li>
+                    <label>ジャンル</label>
+                    <input type="text" name="genre" value="{{ old('genre') }}">
+                </li>
+
+                <li>
                     <label>画像URL</label>
                     <input type="text" name="image_url" value="{{ old('image_url') }}">
                 </li>

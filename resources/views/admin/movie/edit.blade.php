@@ -30,6 +30,11 @@
                 </li>
 
                 <li>
+                    <label>ジャンル</label>
+                    <input type="text" name="genre" value="{{ $movie->genre->name }}">
+                </li>
+
+                <li>
                     <label>画像URL</label>
                     <input type="text" name="image_url" value="{{ $movie->image_url }}">
                 </li>
