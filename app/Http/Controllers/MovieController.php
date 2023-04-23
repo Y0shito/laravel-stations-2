@@ -41,7 +41,10 @@ class MovieController extends Controller
 
     public function showMovie(Movie $id)
     {
-        return view('user.movie', ['movie' => $id]);
+        $movie = $id->load(['schedules' => function ($query) {
+            $query->orderBy('start_time', 'asc');
+        }]);
+        return view('user.movie', compact('movie'));
     }
 
     public function showAdminMovies()

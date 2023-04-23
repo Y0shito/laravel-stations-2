@@ -9,6 +9,9 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['id', 'movie_id', 'start_time', 'end_time'];
+    protected $dates = ['start_time', 'end_time'];
+
     public function movie()
     {
         return $this->belongsTo(Movie::class);
