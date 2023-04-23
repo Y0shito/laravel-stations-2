@@ -17,6 +17,11 @@ class Movie extends Model
         return $this->belongsTo(Genre::class);
     }
 
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
     public static function movieCreate(object $movieData, int $genreId): int
     {
         $movieId = Movie::insertGetId(
