@@ -35,7 +35,7 @@
             @foreach ($movies as $movie)
                 <tr>
                     <td>
-                        <a href="">
+                        <a href="{{ route('user.movie', $movie->id) }}">
                             {{ $movie->title }}
                         </a>
                     </td>

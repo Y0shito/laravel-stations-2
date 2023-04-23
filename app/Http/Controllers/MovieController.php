@@ -39,6 +39,11 @@ class MovieController extends Controller
         return view('user.movies', ['movies' => $foundMovies->paginate(20)]);
     }
 
+    public function showMovie(Movie $id)
+    {
+        return view('user.movie', ['movie' => $id]);
+    }
+
     public function showAdminMovies()
     {
         $movies = Movie::all();

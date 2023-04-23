@@ -26,6 +26,7 @@ use App\Http\Controllers\SheetController;
 // Route::get('/getPractice', [PracticeController::class, 'getPractice']);
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies');
+Route::get('/movies/{id}', [MovieController::class, 'showMovie'])->name('user.movie');
 
 Route::prefix('/admin/movies')->group(function () {
     Route::get('/', [MovieController::class, 'showAdminMovies'])->name('admin.movies');
