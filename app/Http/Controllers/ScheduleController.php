@@ -26,6 +26,11 @@ class ScheduleController extends Controller
         return view('admin.schedule.schedule', compact('movie'));
     }
 
+    public function showAdminScheduleCreate()
+    {
+        return view('admin.schedule.create');
+    }
+
     public function adminScheduleDelete(Schedule $scheduleId)
     {
         try {

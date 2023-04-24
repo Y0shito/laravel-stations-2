@@ -30,6 +30,11 @@
                 <th>作成日時</th>
                 <th>更新日時</th>
             </tr>
+
+            <a href="{{ route('admin.schedule.create', $movie->id) }}">
+                {{ $movie->title }}の上映スケジュール新規作成
+            </a>
+
             @foreach ($movie->schedules as $schedule)
                 <tr>
                     <td>{{ $schedule->id }}</td>
