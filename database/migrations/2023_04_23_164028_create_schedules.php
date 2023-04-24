@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateSchedules extends Migration
@@ -18,9 +19,10 @@ class CreateSchedules extends Migration
             $table->foreignId('movie_id')->constrained()->comment('列');
             $table->time('start_time')->comment('上映開始時刻');
             $table->time('end_time')->comment('上映終了時刻');
-            $table->dateTime('created_at')->nullable()->comment('作成日時');
-            $table->dateTime('updated_at')->nullable()->comment('更新日時');
+            $table->timestamps();
         });
+
+        DB::statement('ALTER TABLE schedules MODIFY created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "登録日時", MODIFY updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新日時"');
     }
 
     /**
