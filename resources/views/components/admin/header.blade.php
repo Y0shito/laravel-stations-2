@@ -3,7 +3,7 @@
     <nav>
         <ul>
             <li><a href="{{ route('admin.movie.create') }}">映画新規登録</a></li>
-            <li><a href="">スケジュール一覧</a></li>
+            <li><a href="{{ route('admin.schedules') }}">スケジュール一覧</a></li>
             <li><a href="">予約一覧</a></li>
         </ul>
     </nav>
