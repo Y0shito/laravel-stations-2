@@ -43,6 +43,7 @@ Route::get('/sheets', [SheetController::class, 'showSheets'])->name('sheets');
 
 Route::prefix('/admin/schedules')->group(function () {
     Route::get('/', [ScheduleController::class, 'showAdminSchedules'])->name('admin.schedules');
+    Route::get('{movieId}', [ScheduleController::class, 'showAdminSchedule'])->name('admin.schedule');
 });
 
 //映画新規作成のURLがadmin/movies/createとsがつくのに対し、nameはadmin.movie.createとしている（作れるのは1個なので）

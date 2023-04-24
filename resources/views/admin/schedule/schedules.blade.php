@@ -9,12 +9,12 @@
 </head>
 
 <body>
-    @include('components.admin.header', ['title' => '映画一覧/スケジュール一覧'])
+    @include('components.admin.header', ['title' => 'スケジュール一覧'])
 
     <div class="contents">
         @foreach ($movies as $movie)
             <h4>
-                <a href="">
+                <a href="{{ route('admin.movie', $movie->id) }}">
                     ID:{{ $movie->id }} {{ $movie->title }}
                 </a>
             </h4>
@@ -31,14 +31,14 @@
                 @foreach ($movie->schedules as $schedule)
                     <tr>
                         <td>{{ $schedule->id }}</td>
-                        <td>{{ $schedule->start_time->format('m/d h:m') }}</td>
-                        <td>{{ $schedule->end_time->format('h:m') }}</td>
+                        <td>{{ $schedule->start_time }}</td>
+                        <td>{{ $schedule->end_time }}</td>
                         <td>{{ $schedule->created_at }}</td>
                         <td>{{ $schedule->updated_at }}</td>
                     </tr>
                 @endforeach
             </table>
-            <a href="">
+            <a href="{{ route('admin.schedule', $movie->id) }}">
                 <p>「{{ $movie->title }}」のスケジュール管理へ</p>
             </a>
             <br>
