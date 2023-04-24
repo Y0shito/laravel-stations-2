@@ -37,6 +37,9 @@ Route::prefix('/admin/movies')->group(function () {
     Route::delete('{id}/destroy', [MovieController::class, 'AdminMovieDelete'])->name('admin.movie.delete');
     Route::get('{id}/edit', [MovieController::class, 'showAdminMovieEdit'])->name('admin.movie.edit');
     Route::patch('{id}/update', [MovieController::class, 'AdminMovieUpdate'])->name('admin.movie.update');
+
+    Route::get('{id}/schedules/create', [ScheduleController::class, 'showAdminScheduleCreate'])->name('admin.schedule.create');
+    Route::post('{id}/schedules/store', [ScheduleController::class, 'adminScheduleStore'])->name('admin.schedule.store');
 });
 
 Route::get('/sheets', [SheetController::class, 'showSheets'])->name('sheets');
@@ -45,7 +48,6 @@ Route::prefix('/admin/schedules')->group(function () {
     Route::get('/', [ScheduleController::class, 'showAdminSchedules'])->name('admin.schedules');
     Route::get('{movieId}', [ScheduleController::class, 'showAdminSchedule'])->name('admin.schedule');
     Route::delete('{scheduleId}/destroy', [ScheduleController::class, 'adminScheduleDelete'])->name('admin.schedule.delete');
-    Route::get('{movieId}/schedules/create', [ScheduleController::class, 'showAdminScheduleCreate'])->name('admin.schedule.create');
 });
 
 //映画新規作成のURLがadmin/movies/createとsがつくのに対し、nameはadmin.movie.createとしている（作れるのは1個なので）
