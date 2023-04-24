@@ -45,7 +45,7 @@
                         </form>
                     </td>
                     <td>
-                        <form method="POST">
+                        <form method="POST" action="{{ route('admin.schedule.delete', $schedule->id) }}">
                             @csrf
                             @method('DELETE')
                             <button onclick="return articleDelete();">
