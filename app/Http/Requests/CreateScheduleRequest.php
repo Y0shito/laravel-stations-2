@@ -31,4 +31,17 @@ class CreateScheduleRequest extends FormRequest
             'end_time_time' => ['required', 'date_format:H:i'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'movie_id.required' => 'IDに値がありません',
+            'start_time_date.required' => '日付を入力してください',
+            'start_time_date.before_or_equal' => '公開終了時間より前の日付で入力してください',
+            'start_time_time.required' => '時間を入力してください',
+            'end_time_date.required' => '日付を入力してください',
+            'end_time_date.after_or_equal' => '公開開始時間より後の日付で入力してください',
+            'end_time_time.required' => '時間を入力してください',
+        ];
+    }
 }

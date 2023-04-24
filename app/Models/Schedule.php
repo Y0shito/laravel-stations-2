@@ -10,12 +10,25 @@ class Schedule extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'movie_id', 'start_time', 'end_time'];
+    protected $fillable = ['id', 'movie_id', 'start_time', 'end_time', 'created_at', 'updated_at'];
     protected $dates = ['start_time', 'end_time'];
 
     public function movie()
     {
         return $this->belongsTo(Movie::class);
+    }
+
+    public static function scheduleStore(object $scheduleData)
+    {
+        DB::transaction(function () use ($scheduleData) {
+            Schedule::insert(
+                [
+                    'movie_id' => $scheduleData->movie_id,
+                    'start_time' => "{$scheduleData->start_time_date} {$scheduleData->start_time_time}",
+                    'end_time' => "{$scheduleData->end_time_date} {$scheduleData->end_time_time}",
+                ]
+            );
+        });
     }
 
     public static function scheduleDelete(int $scheduleId): void
