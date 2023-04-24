@@ -22,6 +22,31 @@
         <p>概要：{{ $movie->description }}</p>
         <p>作成日：{{ $movie->created_at }}</p>
         <p>更新日：{{ $movie->updated_at }}</p>
+
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>開始時刻</th>
+                <th>終了時刻</th>
+                <th>作成日時</th>
+                <th>更新日時</th>
+            </tr>
+            @foreach ($movie->schedules as $schedule)
+                <tr>
+                    <td>{{ $schedule->id }}</td>
+                    <td>{{ $schedule->start_time }}</td>
+                    <td>{{ $schedule->end_time }}</td>
+                    <td>{{ $schedule->created_at }}</td>
+                    <td>{{ $schedule->updated_at }}</td>
+                </tr>
+            @endforeach
+        </table>
+        <a href="{{ route('admin.schedule', $movie->id) }}">
+            <p>「{{ $movie->title }}」のスケジュール管理へ</p>
+        </a>
+        <a href="{{ route('admin.movie.edit', $movie->id) }}">
+            <p>「{{ $movie->title }}」の内容編集へ</p>
+        </a>
     </div>
 
 </body>
@@ -29,6 +54,18 @@
 <style>
     .contents {
         margin: 0px 150px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    table {
+        table-layout: auto;
+    }
+
+    th {
+        white-space: nowrap;
     }
 </style>
 
