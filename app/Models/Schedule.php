@@ -31,6 +31,16 @@ class Schedule extends Model
         });
     }
 
+    public static function scheduleUpdate(object $scheduleData, int $scheduleId): void
+    {
+        DB::transaction(function () use ($scheduleData, $scheduleId) {
+            self::find($scheduleId)->update([
+                'start_time' => "{$scheduleData->start_time_date} {$scheduleData->start_time_time}",
+                'end_time' => "{$scheduleData->end_time_date} {$scheduleData->end_time_time}",
+            ]);
+        });
+    }
+
     public static function scheduleDelete(int $scheduleId): void
     {
         DB::transaction(function () use ($scheduleId) {

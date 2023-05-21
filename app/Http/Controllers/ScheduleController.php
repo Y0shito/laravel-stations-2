@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Schedule;
 use App\Http\Requests\CreateScheduleRequest;
+use App\Http\Requests\UpdateScheduleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 
 class ScheduleController extends Controller
@@ -44,6 +46,24 @@ class ScheduleController extends Controller
         } catch (\Exception $e) {
             Log::error($e);
             return redirect()->back()->with(['failed' => "スケジュールの新規登録が失敗しました"]);
+        }
+    }
+
+    public function showAdminScheduleEdit(Schedule $scheduleId)
+    {
+        return view('admin.schedule.edit', ['schedule' => $scheduleId->load('movie')]);
+    }
+
+    public function adminScheduleUpdate(UpdateScheduleRequest $request, Schedule $scheduleId)
+    {
+        try {
+            //第1引数に更新する値、第2引数にschedule:id
+            Schedule::scheduleUpdate($request, $scheduleId->id);
+
+            return redirect()->route('admin.schedule', $request->movie_id)->with('success', "スケジュールID：{$scheduleId->id}の編集が完了しました");
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect()->back()->with('failed', "スケジュールID：{$scheduleId->id}の編集が失敗しました");
         }
     }
 

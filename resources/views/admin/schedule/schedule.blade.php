@@ -43,7 +43,7 @@
                     <td>{{ $schedule->created_at }}</td>
                     <td>{{ $schedule->updated_at }}</td>
                     <td>
-                        <form method="GET">
+                        <form method="GET" action="{{ route('admin.schedule.edit', $schedule->id) }}">
                             <button>
                                 編集
                             </button>

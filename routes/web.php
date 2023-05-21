@@ -47,8 +47,7 @@ Route::get('/sheets', [SheetController::class, 'showSheets'])->name('sheets');
 Route::prefix('/admin/schedules')->group(function () {
     Route::get('/', [ScheduleController::class, 'showAdminSchedules'])->name('admin.schedules');
     Route::get('{movieId}', [ScheduleController::class, 'showAdminSchedule'])->name('admin.schedule');
+    Route::patch('{scheduleId}/update', [ScheduleController::class, 'adminScheduleUpdate'])->name('admin.schedule.update');
     Route::delete('{scheduleId}/destroy', [ScheduleController::class, 'adminScheduleDelete'])->name('admin.schedule.delete');
+    Route::get('{scheduleId}/edit', [ScheduleController::class, 'showAdminScheduleEdit'])->name('admin.schedule.edit');
 });
-
-//映画新規作成のURLがadmin/movies/createとsがつくのに対し、nameはadmin.movie.createとしている（作れるのは1個なので）
-//sを統一すべきか？
