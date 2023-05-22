@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class ValidatorServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,19 @@ class ValidatorServiceProvider extends ServiceProvider
             $endTime = "{$request['end_time_date']} {$request['end_time_time']}";
 
             if ($startTime === $endTime) {
+                return false;
+            }
+
+            return true;
+        });
+
+        Validator::extendImplicit('is_less_than_five_minutes', function () {
+            $request = request()->all();
+
+            $startTime = Carbon::createFromFormat('H:i', $request['start_time_time']);
+            $endTime = Carbon::createFromFormat('H:i', $request['end_time_time']);
+
+            if ($startTime->diffInMinutes($endTime) <= 5) {
                 return false;
             }
 
