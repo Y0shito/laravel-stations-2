@@ -51,5 +51,18 @@ class ValidatorServiceProvider extends ServiceProvider
 
             return true;
         });
+
+        Validator::extendImplicit('is_starttime_after_endtime', function () {
+            $request = request()->all();
+
+            $startTime = Carbon::parse("{$request['start_time_date']} {$request['start_time_time']}");
+            $endTime = Carbon::parse("{$request['end_time_date']} {$request['end_time_time']}");
+
+            if ($startTime->greaterThan($endTime)) {
+                return false;
+            }
+
+            return true;
+        });
     }
 }
