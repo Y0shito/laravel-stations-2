@@ -25,10 +25,10 @@ class CreateScheduleRequest extends FormRequest
     {
         return [
             'movie_id' => ['required'],
-            'start_time_date' => ['required', 'is_same_datetime', 'date_format:Y-m-d', 'before_or_equal:end_time_date'],
-            'start_time_time' => ['required', 'is_same_datetime', 'is_less_than_five_minutes', 'date_format:H:i'],
-            'end_time_date' => ['required', 'is_same_datetime', 'date_format:Y-m-d', 'after_or_equal:start_time_date'],
-            'end_time_time' => ['required', 'is_same_datetime', 'is_less_than_five_minutes', 'date_format:H:i'],
+            'start_time_date' => ['required', 'date_format:Y-m-d', 'is_same_datetime', 'is_starttime_after_endtime', 'before_or_equal:end_time_date'],
+            'start_time_time' => ['required', 'is_same_datetime', 'is_starttime_after_endtime', 'is_less_than_five_minutes', 'date_format:H:i'],
+            'end_time_date' => ['required', 'is_same_datetime', 'is_starttime_after_endtime', 'after_or_equal:start_time_date', 'date_format:Y-m-d'],
+            'end_time_time' => ['required', 'is_same_datetime', 'is_starttime_after_endtime', 'is_less_than_five_minutes', 'date_format:H:i'],
         ];
     }
 

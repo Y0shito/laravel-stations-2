@@ -161,5 +161,6 @@ return [
 
     'is_same_datetime' => '開始時刻と終了時刻が同じです',
     'is_less_than_five_minutes' => '開始時刻と終了時刻の間隔が5分未満です',
+    'is_starttime_after_endtime' => '開始時刻を終了時刻より前に設定してください',
 
 ];
